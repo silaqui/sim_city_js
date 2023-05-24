@@ -21,9 +21,15 @@
 </div>
 <script type="module">
     import {createScene} from '/src/scene.js'
+    import {createCity} from '/src/city.js'
 
     window.onload = () => {
-        window.scene = createScene();
+        const scene = createScene();
+        const city = createCity(8);
+
+        scene.init(city)
+
+        window.scene = scene;
         window.scene.start();
         document.addEventListener('mousedown', window.scene.onMouseDown , false)
         document.addEventListener('mouseup', window.scene.onMouseUp , false)
