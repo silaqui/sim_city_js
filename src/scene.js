@@ -15,45 +15,54 @@ export function createScene() {
     gameWindow.appendChild(renderer.domElement);
 
     let meshes = [];
+    let buildings = [];
 
     function init(city) {
         scene.clear()
 
-        meshes = []
         for (let x = 0; x < city.size; x++) {
             const column = [];
             for (let y = 0; y < city.size; y++) {
                 // grass
-                // load the mesh for tile at (x,y)
                 const geometry = new THREE.BoxGeometry(1, 1, 1);
                 const material = new THREE.MeshLambertMaterial({color: 0x00aa00});
-                const mesh = new THREE.Mesh(geometry, material)
+                const mesh = new THREE.Mesh(geometry, material);
                 mesh.position.set(x, -0.5, y);
                 // add to scene
-                scene.add(mesh)
+                scene.add(mesh);
                 // add to meshes array
-                column.push(mesh)
-
-                // building
-                // load the mesh for tile at (x,y)
-                const tile = city.data[x][y]
-
-                if (tile.building === 'building') {
-                    const buildingGeometry = new THREE.BoxGeometry(1, 1, 1);
-                    const buildingMaterial = new THREE.MeshLambertMaterial({color: 0x777777});
-                    const buildingMesh = new THREE.Mesh(buildingGeometry, buildingMaterial)
-                    buildingMesh.position.set(x, 0.5, y);
-                    // add to scene
-                    scene.add(buildingMesh)
-                    // add to meshes array
-                    column.push(buildingMesh)
-                }
+                column.push(mesh);
             }
-            meshes.push(column)
+            meshes.push(column);
+            buildings.push([...Array(city.size)]);
         }
         setupLights();
     }
 
+    function update(city){
+        for (let x = 0; x < city.size; x++) {
+            for (let y = 0; y < city.size; y++) {
+                // building
+                const tile = city.data[x][y]
+
+                if (tile.building && tile.building.startsWith('building')) {
+                    const height = Number(tile.building.slice(-1))
+                    const buildingGeometry = new THREE.BoxGeometry(1, height, 1);
+                    const buildingMaterial = new THREE.MeshLambertMaterial({color: 0x777777});
+                    const buildingMesh = new THREE.Mesh(buildingGeometry, buildingMaterial)
+                    buildingMesh.position.set(x, height / 2, y);
+                    // add to scene
+                    if(buildings[x][y])(
+                        scene.remove(buildings[x][y])
+                    )
+                    scene.add(buildingMesh)
+                    // add to meshes array
+                    buildings[x][y] = meshes
+                }
+            }
+        }
+
+    }
     function setupLights() {
 
         const lights = [
@@ -100,6 +109,7 @@ export function createScene() {
         onMouseDown,
         onMouseUp,
         onMouseMove,
-        init
+        init,
+        update
     }
 }

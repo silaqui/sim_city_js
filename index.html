@@ -17,23 +17,13 @@
 <body>
 
 <div id="root-window">
-    <div id="render-target" oncontextmenu="return false;"></div>
+    <div id="render-target"></div>
 </div>
 <script type="module">
-    import {createScene} from '/src/scene.js'
-    import {createCity} from '/src/city.js'
+    import {createGame} from '/src/game.js'
 
     window.onload = () => {
-        const scene = createScene();
-        const city = createCity(8);
-
-        scene.init(city)
-
-        window.scene = scene;
-        window.scene.start();
-        document.addEventListener('mousedown', window.scene.onMouseDown , false)
-        document.addEventListener('mouseup', window.scene.onMouseUp , false)
-        document.addEventListener('mousemove', window.scene.onMouseMove , false)
+        window.game = createGame();
     }
 
 </script>
