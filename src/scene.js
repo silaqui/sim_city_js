@@ -22,6 +22,8 @@ export function createScene() {
     let train = [];
     let buildings = [];
 
+    let onObjectSelected = undefined;
+
     function init(city) {
         scene.clear()
         for (let x = 0; x < city.size; x++) {
@@ -93,19 +95,20 @@ export function createScene() {
         mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
         mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
 
-        console.log(mouse);
-
         reyCaster.setFromCamera(mouse, camera.camera);
 
         let intersection = reyCaster.intersectObjects(scene.children, false);
 
         if (intersection.length > 0) {
-            console.log(intersection[0])
             if (selectedObject) {
                 selectedObject.material.emissive.setHex(0);
             }
             selectedObject = intersection[0].object
             selectedObject.material.emissive.setHex(0x555555);
+        }
+
+        if (this.onObjectSelected) {
+            this.onObjectSelected(selectedObject);
         }
     }
 
@@ -118,6 +121,7 @@ export function createScene() {
     }
 
     return {
+        onObjectSelected,
         start,
         stop,
         onMouseDown,

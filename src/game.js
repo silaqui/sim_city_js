@@ -8,10 +8,21 @@ export function createGame() {
 
     scene.init(city)
 
+    scene.onObjectSelected = (selectedObject) => {
+        console.log(selectedObject);
+
+        let {x, y} = selectedObject.userData;
+
+        const tile = city.data[x][y];
+
+        console.log(tile)
+
+    }
+
     window.scene = scene;
-    document.addEventListener('mousedown', window.scene.onMouseDown, false);
-    document.addEventListener('mouseup', window.scene.onMouseUp, false);
-    document.addEventListener('mousemove', window.scene.onMouseMove, false);
+    document.addEventListener('mousedown', window.scene.onMouseDown.bind(scene), false);
+    document.addEventListener('mouseup', window.scene.onMouseUp.bind(scene), false);
+    document.addEventListener('mousemove', window.scene.onMouseMove.bind(scene), false);
     document.addEventListener('contextmenu', (event) => event.preventDefault(), false);
 
     const game = {
