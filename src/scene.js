@@ -105,11 +105,12 @@ export function createScene() {
             }
             selectedObject = intersection[0].object
             selectedObject.material.emissive.setHex(0x555555);
+
+            if (selectedObject) {
+                this.onObjectSelected(selectedObject);
+            }
         }
 
-        if (this.onObjectSelected) {
-            this.onObjectSelected(selectedObject);
-        }
     }
 
     function onMouseUp(event) {

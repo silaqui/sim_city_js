@@ -12,18 +12,52 @@
           "three/addons/": "https://unpkg.com/three/examples/jsm/"
         }
       }
+
+
+
+
     </script>
 </head>
 <body>
 
 <div id="root-window">
-    <div id="render-target"></div>
+    <div id="render-target">
+        <div id="ui-toolbar">
+            <button class="ui-button selected" class="ui-button" id="button-bulldoze"
+                    onclick="setActiveToolId(event,'bulldoze')">
+                BULLDOZE
+            </button>
+            <button class="ui-button" id="button-residential" onclick="setActiveToolId(event,'residential')">
+                RESIDENTIAL
+            </button>
+            <button class="ui-button" id="button-commercial" onclick="setActiveToolId(event,'commercial')">
+                COMMERCIAL
+            </button>
+            <button class="ui-button" id="button-industrial" onclick="setActiveToolId(event,'industrial')">
+                INDUSTRIAL
+            </button>
+            <button class="ui-button" id="button-road" onclick="setActiveToolId(event,'road')">
+                ROAD
+            </button>
+        </div>
+    </div>
 </div>
 <script type="module">
     import {createGame} from '/src/game.js'
 
+    let selectedControl = document.getElementById('button-bulldoze');
+
     window.onload = () => {
         window.game = createGame();
+    }
+
+    window.setActiveToolId = (event, toolId) => {
+        if (selectedControl) {
+            selectedControl.classList.remove('selected');
+        }
+        selectedControl = event.target
+        event.target.classList.add('selected');
+        window.game.setActiveToolId(toolId)
     }
 
 </script>
