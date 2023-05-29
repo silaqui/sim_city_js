@@ -14,14 +14,14 @@ function loadTexture(url) {
 
 const textures = {
     'grass': loadTexture('public/textures/grass.png'),
-    'residential1': loadTexture('public/textures/industrial3.png'),
-    'residential2': loadTexture('public/textures/industrial3.png'),
-    'residential3': loadTexture('public/textures/industrial3.png'),
-    'commercial1': loadTexture('public/textures/industrial3.png'),
-    'commercial2': loadTexture('public/textures/industrial3.png'),
-    'commercial3': loadTexture('public/textures/industrial3.png'),
-    'industrial1': loadTexture('public/textures/industrial3.png'),
-    'industrial2': loadTexture('public/textures/industrial3.png'),
+    'residential1': loadTexture('public/textures/residential1.png'),
+    'residential2': loadTexture('public/textures/residential2.png'),
+    'residential3': loadTexture('public/textures/residential3.png'),
+    'commercial1': loadTexture('public/textures/commercial1.png'),
+    'commercial2': loadTexture('public/textures/commercial2.png'),
+    'commercial3': loadTexture('public/textures/commercial3.png'),
+    'industrial1': loadTexture('public/textures/industrial1.png'),
+    'industrial2': loadTexture('public/textures/industrial2.png'),
     'industrial3': loadTexture('public/textures/industrial3.png'),
 }
 
@@ -35,7 +35,7 @@ function getSideMaterial(textureName) {
 
 const assets = {
     "grass": (x, y) => {
-        const material = new THREE.MeshLambertMaterial({color: 0x00aa00});
+        const material = new THREE.MeshLambertMaterial({map: textures['grass'].clone()});
         const mesh = new THREE.Mesh(cube, material);
         mesh.userData = {id: `grass`, x, y};
         mesh.position.set(x, -0.5, y);
