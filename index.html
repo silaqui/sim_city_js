@@ -23,43 +23,46 @@
 <div id="root-window">
     <div id="render-target">
         <div id="ui-toolbar">
-            <button class="ui-button selected" class="ui-button" id="button-bulldoze"
-                    onclick="setActiveToolId(event,'bulldoze')">
-                BULLDOZE
-            </button>
-            <button class="ui-button" id="button-residential" onclick="setActiveToolId(event,'residential')">
-                RESIDENTIAL
-            </button>
-            <button class="ui-button" id="button-commercial" onclick="setActiveToolId(event,'commercial')">
-                COMMERCIAL
-            </button>
-            <button class="ui-button" id="button-industrial" onclick="setActiveToolId(event,'industrial')">
-                INDUSTRIAL
-            </button>
-            <button class="ui-button" id="button-road" onclick="setActiveToolId(event,'road')">
-                ROAD
+            <div>
+                <button class="ui-button selected" class="ui-button" data-type="select"
+                        id="button-select"
+                        onclick="window.game.onToolSelected(event)">
+                    SELECT
+                </button>
+                <button class="ui-button" class="ui-button" data-type="bulldoze"
+                        id="button-bulldoze"
+                        onclick="window.game.onToolSelected(event)">
+                    BULLDOZE
+                </button>
+                <button class="ui-button" data-type="residential" id="button-residential"
+                        onclick="window.game.onToolSelected(event)">
+                    RESIDENTIAL
+                </button>
+                <button class="ui-button" data-type="commercial" id="button-commercial"
+                        onclick="window.game.onToolSelected(event)">
+                    COMMERCIAL
+                </button>
+                <button class="ui-button" data-type="industrial" id="button-industrial"
+                        onclick="window.game.onToolSelected(event)">
+                    INDUSTRIAL
+                </button>
+                <button class="ui-button" data-type="road" id="button-road"
+                        onclick="window.game.onToolSelected(event)">
+                    ROAD
+                </button>
+            </div>
+            <div class="ui-container" id="info-panel">
+                <h1>INFO</h1>
+                <div id="selected-object-info"></div>
+            </div>
+            <button class="ui-button" id="button-pause" onclick="window.game.togglePause()">
+                PAUSE
             </button>
         </div>
     </div>
 </div>
 <script type="module">
     import {createGame} from '/src/game.js'
-
-    let selectedControl = document.getElementById('button-bulldoze');
-
-    window.onload = () => {
-        window.game = createGame();
-    }
-
-    window.setActiveToolId = (event, toolId) => {
-        if (selectedControl) {
-            selectedControl.classList.remove('selected');
-        }
-        selectedControl = event.target
-        event.target.classList.add('selected');
-        window.game.setActiveToolId(toolId)
-    }
-
 </script>
 
 </body>
