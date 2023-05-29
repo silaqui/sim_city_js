@@ -15,6 +15,10 @@ export function createScene() {
 
     gameWindow.appendChild(renderer.domElement);
 
+    const reyCaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let selectedObject = undefined;
+
     let train = [];
     let buildings = [];
 
@@ -85,6 +89,24 @@ export function createScene() {
 
     function onMouseDown(event) {
         camera.onMouseDown(event)
+
+        mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+        mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+
+        console.log(mouse);
+
+        reyCaster.setFromCamera(mouse, camera.camera);
+
+        let intersection = reyCaster.intersectObjects(scene.children, false);
+
+        if (intersection.length > 0) {
+            console.log(intersection[0])
+            if (selectedObject) {
+                selectedObject.material.emissive.setHex(0);
+            }
+            selectedObject = intersection[0].object
+            selectedObject.material.emissive.setHex(0x555555);
+        }
     }
 
     function onMouseUp(event) {
