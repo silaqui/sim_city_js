@@ -1,6 +1,5 @@
 import {createScene} from '/src/scene.js'
 import {createCity} from '/src/city.js'
-import buildingsFactory from '/src/buildings.js'
 
 window.onload = () => {
     window.game = createGame();
@@ -83,28 +82,17 @@ export function createGame() {
             scene.setActiveObject(object);
             updateInfoPanel(tile);
         } else if (activeToolId === 'bulldoze') {
-            bulldoze(tile);
+            tile.removeBuilding();
+            scene.update(city);
         } else if (!tile.building) {
-            placeBuilding(tile);
+            const buildingType = activeToolId;
+            tile.placeBuilding(buildingType);
+            scene.update(city);
         }
     }
 
     function updateInfoPanel(tile) {
         document.getElementById('selected-object-info').innerHTML = tile ? JSON.stringify(tile, ' ', 2) : '';
-    }
-
-    function bulldoze(tile) {
-        console.log(activeToolId);
-        tile.building = undefined;
-        scene.update(city);
-        console.log(tile);
-    }
-
-    function placeBuilding(tile) {
-        console.log(activeToolId);
-        tile.building = buildingsFactory[activeToolId]();
-        scene.update(city);
-        console.log(tile);
     }
 
     setInterval(() => {

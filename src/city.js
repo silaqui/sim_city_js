@@ -1,3 +1,5 @@
+import {createTile} from "./tile.js";
+
 export function createCity(size) {
     const tiles = [];
 
@@ -26,14 +28,5 @@ export function createCity(size) {
         size,
         tiles,
         update
-    }
-}
-
-function createTile(x, y) {
-    return {
-        x,
-        y,
-        terrainId: 'grass',
-        building: undefined
     }
 }
