@@ -97,7 +97,7 @@ export function createGame() {
     }
 
     function updateInfoPanel(tile) {
-        // document.getElementById('selected-object-info').innerHTML = tile ? JSON.stringify(tile, ' ', 2) : '';
+        document.getElementById('info-overlay-details').innerHTML = tile ? tile.toHtml() : '';
     }
 
     function updateTitleBar() {

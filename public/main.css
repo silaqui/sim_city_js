@@ -107,3 +107,25 @@ h1 {
 #population-counter {
     margin-left: 8px;
 }
+
+#info-overlay {
+    position: fixed;
+
+    top: 50px;
+    right: 50px;
+    margin: 16px;
+    padding: 12px;
+    width: 300px;
+
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 20%);
+}
+
+#info-overlay-header {
+    font-weight: bold;
+}
+
+#info-overlay-details {
+
+}

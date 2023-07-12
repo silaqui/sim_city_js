@@ -12,6 +12,17 @@ export function createTile(x, y) {
         },
         placeBuilding(activeToolId) {
             this.building = createBuilding(activeToolId);
+        },
+        toHtml() {
+            let html = '';
+            html += `Coordinates: (X: ${this.x}, Y: ${this.y})<br>`
+            html += `Terrain: ${this.terrainId}<br>`
+
+            if (this.building) {
+                html += `${this.building.toHtml()}`
+            }
+
+            return html;
         }
     }
 

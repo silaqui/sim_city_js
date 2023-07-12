@@ -72,6 +72,11 @@ export function createCitizen(house) {
 
         update(city) {
 
+        },
+        toHtml() {
+            let html = '';
+            html += `<span>${this.name} | ${this.age}</span>`
+            return html
         }
     }
 }

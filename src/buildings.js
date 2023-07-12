@@ -38,6 +38,29 @@ function createResidentialBuilding() {
                     this.updated = true;
                 }
             }
+        },
+        toHtml() {
+            let html = '';
+            html += `<br><strong>Building</strong><br>`
+            html += `Type: ${this.type}<br>`
+            html += `Style: ${this.style}<br>`
+            html += `Height: ${this.height}<br>`
+
+            html += `<br><strong>Residential</strong><br>`
+
+            html += `<ui style="margin-top: 0; padding-left: 20px">`
+
+            if (this.residents.length > 0) {
+                for (const resident of this.residents) {
+                    html += `<li>${resident.toHtml()}</li>`
+                }
+            } else {
+                html += `<li>None</li>`
+            }
+
+            html += `</ui>`
+
+            return html;
         }
     }
 }
@@ -56,6 +79,14 @@ function createCommercialBuilding() {
                     this.updated = true;
                 }
             }
+        },
+        toHtml() {
+            let html = '';
+            html += `<br><strong>Building</strong><br>`
+            html += `Type: ${this.type}<br>`
+            html += `Style: ${this.style}<br>`
+            html += `Height: ${this.height}<br>`
+            return html;
         }
     }
 }
@@ -74,6 +105,14 @@ function createIndustrialBuilding() {
                     this.updated = true;
                 }
             }
+        },
+        toHtml() {
+            let html = '';
+            html += `<br><strong>Building</strong><br>`
+            html += `Type: ${this.type}<br>`
+            html += `Style: ${this.style}<br>`
+            html += `Height: ${this.height}<br>`
+            return html;
         }
     }
 }
@@ -85,6 +124,12 @@ function createRoad() {
         updated: true,
         update(city) {
             this.updated = false;
+        },
+        toHtml() {
+            let html = '';
+            html += `<br><strong>Building</strong><br>`
+            html += `Type: ${this.type}<br>`
+            return html;
         }
     }
 }
