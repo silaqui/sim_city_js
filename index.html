@@ -16,6 +16,7 @@
 
 
 
+
     </script>
 </head>
 <body>
@@ -23,40 +24,34 @@
 <div id="root-window">
     <div id="render-target">
         <div id="ui-toolbar">
-            <div>
-                <button class="ui-button selected" class="ui-button" data-type="select"
-                        id="button-select"
-                        onclick="window.game.onToolSelected(event)">
-                    SELECT
-                </button>
-                <button class="ui-button" class="ui-button" data-type="bulldoze"
-                        id="button-bulldoze"
-                        onclick="window.game.onToolSelected(event)">
-                    BULLDOZE
-                </button>
-                <button class="ui-button" data-type="residential" id="button-residential"
-                        onclick="window.game.onToolSelected(event)">
-                    RESIDENTIAL
-                </button>
-                <button class="ui-button" data-type="commercial" id="button-commercial"
-                        onclick="window.game.onToolSelected(event)">
-                    COMMERCIAL
-                </button>
-                <button class="ui-button" data-type="industrial" id="button-industrial"
-                        onclick="window.game.onToolSelected(event)">
-                    INDUSTRIAL
-                </button>
-                <button class="ui-button" data-type="road" id="button-road"
-                        onclick="window.game.onToolSelected(event)">
-                    ROAD
-                </button>
-            </div>
-            <div class="ui-container" id="info-panel">
-                <h1>INFO</h1>
-                <div id="selected-object-info"></div>
-            </div>
+            <button class="ui-button selected" class="ui-button" data-type="select"
+                    id="button-select"
+                    onclick="window.game.onToolSelected(event)">
+                <img class="toolbar-icon" src="public/icons/select.png">
+            </button>
+            <button class="ui-button" class="ui-button" data-type="bulldoze"
+                    id="button-bulldoze"
+                    onclick="window.game.onToolSelected(event)">
+                <img class="toolbar-icon" src="public/icons/bulldozer.png">
+            </button>
+            <button class="ui-button" data-type="residential" id="button-residential"
+                    onclick="window.game.onToolSelected(event)">
+                <img class="toolbar-icon" src="public/icons/house.png">
+            </button>
+            <button class="ui-button" data-type="commercial" id="button-commercial"
+                    onclick="window.game.onToolSelected(event)">
+                <img class="toolbar-icon" src="public/icons/office.png">
+            </button>
+            <button class="ui-button" data-type="industrial" id="button-industrial"
+                    onclick="window.game.onToolSelected(event)">
+                <img class="toolbar-icon" src="public/icons/factory.png">
+            </button>
+            <button class="ui-button" data-type="road" id="button-road"
+                    onclick="window.game.onToolSelected(event)">
+                <img class="toolbar-icon" src="public/icons/road.png">
+            </button>
             <button class="ui-button" id="button-pause" onclick="window.game.togglePause()">
-                PAUSE
+                <img class="toolbar-icon" id="button-pause-icon" src="public/icons/pause.png">
             </button>
         </div>
     </div>

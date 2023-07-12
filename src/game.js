@@ -38,7 +38,11 @@ export function createGame() {
 
     function togglePause() {
         isPaused = !isPaused;
-        document.getElementById('button-pause').innerHTML = isPaused ? 'RESUME' : 'PAUSE';
+        if (isPaused) {
+            document.getElementById('button-pause-icon').src = 'public/icons/play.png';
+        } else {
+            document.getElementById('button-pause-icon').src = 'public/icons/pause.png';
+        }
     }
 
     let lastMove = new Date();
@@ -71,7 +75,6 @@ export function createGame() {
 
     function useActiveTool(object) {
         if (!object) {
-            updateInfoPanel(null);
             return;
         }
 
@@ -80,7 +83,6 @@ export function createGame() {
 
         if (activeToolId === 'select') {
             scene.setActiveObject(object);
-            updateInfoPanel(tile);
         } else if (activeToolId === 'bulldoze') {
             tile.removeBuilding();
             scene.update(city);
@@ -89,10 +91,6 @@ export function createGame() {
             tile.placeBuilding(buildingType);
             scene.update(city);
         }
-    }
-
-    function updateInfoPanel(tile) {
-        document.getElementById('selected-object-info').innerHTML = tile ? JSON.stringify(tile, ' ', 2) : '';
     }
 
     setInterval(() => {
