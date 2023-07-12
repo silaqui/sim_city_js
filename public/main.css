@@ -78,3 +78,32 @@ h1 {
     height: 40px;
     pointer-events: none;
 }
+
+#title-bar {
+    position: fixed;
+
+    top: 0;
+    left: 66px;
+    right: 0;
+    height: 50px;
+
+    background-color: rgba(0, 0, 0, 0.2);
+
+    font-size: x-large;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-bar-item {
+    flex-grow: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#population-counter {
+    margin-left: 8px;
+}

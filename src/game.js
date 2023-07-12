@@ -27,6 +27,7 @@ export function createGame() {
         if (isPaused) return;
         city.update();
         scene.update(city);
+        updateTitleBar();
     }
 
     function onMouseDown(event) {
@@ -75,6 +76,7 @@ export function createGame() {
 
     function useActiveTool(object) {
         if (!object) {
+            updateInfoPanel(null);
             return;
         }
 
@@ -83,6 +85,7 @@ export function createGame() {
 
         if (activeToolId === 'select') {
             scene.setActiveObject(object);
+            updateInfoPanel(tile);
         } else if (activeToolId === 'bulldoze') {
             tile.removeBuilding();
             scene.update(city);
@@ -91,6 +94,14 @@ export function createGame() {
             tile.placeBuilding(buildingType);
             scene.update(city);
         }
+    }
+
+    function updateInfoPanel(tile) {
+        // document.getElementById('selected-object-info').innerHTML = tile ? JSON.stringify(tile, ' ', 2) : '';
+    }
+
+    function updateTitleBar() {
+        document.getElementById('population-counter').innerHTML = city.getPopulation()
     }
 
     setInterval(() => {

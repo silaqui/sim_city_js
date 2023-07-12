@@ -28,6 +28,11 @@ export function createCity(size) {
                     tiles[x][y].building?.update(this);
                 }
             }
+        },
+
+        getPopulation() {
+            return citizens.length;
         }
+
     }
 }
