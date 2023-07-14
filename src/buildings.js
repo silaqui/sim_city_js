@@ -1,22 +1,24 @@
 import {createCitizen} from "./citizens.js";
 
-export function createBuilding(buildingType) {
+export function createBuilding(x, y, buildingType) {
     switch (buildingType) {
         case 'residential' :
-            return createResidentialBuilding();
+            return createResidentialBuilding(x, y);
         case 'commercial' :
-            return createCommercialBuilding();
+            return createCommercialBuilding(x, y);
         case 'industrial' :
-            return createIndustrialBuilding();
+            return createIndustrialBuilding(x, y);
         case 'road' :
-            return createRoad();
+            return createRoad(x, y);
         default:
             console.error(`${buildingType} is not recognized.`);
     }
 }
 
-function createResidentialBuilding() {
+function createResidentialBuilding(x, y) {
     return {
+        x,
+        y,
         id: crypto.randomUUID(),
         type: 'residential',
         style: Math.floor(3 * Math.random() + 1),
@@ -65,13 +67,24 @@ function createResidentialBuilding() {
     }
 }
 
-function createCommercialBuilding() {
+function createCommercialBuilding(x, y) {
     return {
+        x,
+        y,
         id: crypto.randomUUID(),
         type: 'commercial',
+        name: generateBusinessName(),
         style: Math.floor(3 * Math.random() + 1),
         height: 1,
         updated: true,
+        workers: [],
+        maxWorkers: 4,
+        numbersOfJobsAvailable() {
+            return this.maxWorkers - this.workers.length
+        },
+        numbersOfJobsFilled() {
+            return this.workers.length
+        },
         update(city) {
             if (Math.random() < 0.01) {
                 if (this.height < 4) {
@@ -86,18 +99,54 @@ function createCommercialBuilding() {
             html += `Type: ${this.type}<br>`
             html += `Style: ${this.style}<br>`
             html += `Height: ${this.height}<br>`
+
+            html += `<br><strong>Commercial ${this.numbersOfJobsFilled()}/${this.maxWorkers}</strong><br>`
+
+            html += `<ui style="margin-top: 0; padding-left: 20px">`
+
+            if (this.workers.length > 0) {
+                for (const resident of this.workers) {
+                    html += `<li>${resident.toHtml()}</li>`
+                }
+            } else {
+                html += `<li>None</li>`
+            }
+
             return html;
-        }
+        },
     }
 }
 
-function createIndustrialBuilding() {
+const prefixes = ['Apex', 'Vortex', 'Elevate', 'Zenith', 'Nova', 'Synapse', 'Pulse', 'Enigma', 'Catalyst', 'Axiom'];
+const suffixes = ['Dynamics', 'Ventures', 'Solutions', 'Technologies', 'Innovations', 'Industries', 'Enterprises', 'Systems', 'Mechanics', 'Manufacturing'];
+const businessSuffixes = ['LLC', 'Inc.', 'Co.', 'Corp.', 'Ltd.'];
+
+function generateBusinessName() {
+    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+    const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+    const businessSuffix = businessSuffixes[Math.floor(Math.random() * businessSuffixes.length)];
+
+    return prefix + ' ' + suffix + ' ' + businessSuffix;
+}
+
+function createIndustrialBuilding(x, y) {
     return {
+        x,
+        y,
         id: crypto.randomUUID(),
         type: 'industrial',
+        name: generateBusinessName(),
         style: Math.floor(3 * Math.random() + 1),
         height: 1,
         updated: true,
+        workers: [],
+        maxWorkers: 4,
+        numbersOfJobsAvailable() {
+            return this.maxWorkers - this.workers.length
+        },
+        numbersOfJobsFilled() {
+            return this.workers.length
+        },
         update(city) {
             if (Math.random() < 0.01) {
                 if (this.height < 4) {
@@ -112,13 +161,39 @@ function createIndustrialBuilding() {
             html += `Type: ${this.type}<br>`
             html += `Style: ${this.style}<br>`
             html += `Height: ${this.height}<br>`
+
+            html += `<br><strong>Industrial ${this.numbersOfJobsFilled()}/${this.maxWorkers}</strong><br>`
+
+            html += `<ui style="margin-top: 0; padding-left: 20px">`
+
+            if (this.workers.length > 0) {
+                for (const resident of this.workers) {
+                    html += `<li>${resident.toHtml()}</li>`
+                }
+            } else {
+                html += `<li>None</li>`
+            }
             return html;
         }
     }
 }
 
-function createRoad() {
+// const prefixes = ['Apex', 'Vortex', 'Elevate', 'Zenith', 'Nova', 'Synapse', 'Pulse', 'Enigma', 'Catalyst', 'Axiom'];
+// const suffixes = ['Dynamics', 'Ventures', 'Solutions', 'Technologies', 'Innovations', 'Industries', 'Enterprises', 'Systems', 'Mechanics', 'Manufacturing'];
+// const businessSuffixes = ['LLC', 'Inc.', 'Co.', 'Corp.', 'Ltd.'];
+//
+// function generateBusinessName() {
+//     const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+//     const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+//     const businessSuffix = businessSuffixes[Math.floor(Math.random() * businessSuffixes.length)];
+//
+//     return prefix + ' ' + suffix + ' ' + businessSuffix;
+// }
+
+function createRoad(x, y) {
     return {
+        x,
+        y,
         id: crypto.randomUUID(),
         type: 'road',
         updated: true,

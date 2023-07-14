@@ -2,6 +2,7 @@ import {createBuilding} from "./buildings.js";
 
 export function createTile(x, y) {
     return {
+        id: crypto.randomUUID(),
         x,
         y,
         terrainId: 'grass',
@@ -11,8 +12,12 @@ export function createTile(x, y) {
             this.building = null;
         },
         placeBuilding(activeToolId) {
-            this.building = createBuilding(activeToolId);
+            this.building = createBuilding(x, y, activeToolId);
         },
+        distanceTo(tile) {
+            return Math.abs(this.x - tile.x) + Math.abs(this.y - tile.y);
+        },
+
         toHtml() {
             let html = '';
             html += `Coordinates: (X: ${this.x}, Y: ${this.y})<br>`
