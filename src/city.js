@@ -2,7 +2,6 @@ import {createTile} from "./tile.js";
 
 export function createCity(size) {
     const tiles = [];
-    const citizens = [];
 
     function init() {
         for (let x = 0; x < size; x++) {
@@ -21,7 +20,6 @@ export function createCity(size) {
     return {
         size,
         tiles,
-        citizens,
 
         update() {
             for (let x = 0; x < size; x++) {
@@ -30,13 +28,26 @@ export function createCity(size) {
                 }
             }
 
-            for (const c of citizens) {
-                c.update(this);
+            for (let x = 0; x < this.size; x++) {
+                for (let y = 0; y < this.size; y++) {
+                    const tile = this.tiles[x][y];
+                    const residents = tile.building?.residents;
+                    if (residents) {
+                        residents.forEach(resident => resident.update(this));
+                    }
+                }
             }
         },
 
         getPopulation() {
-            return citizens.length;
+            let population = 0;
+            for (let x = 0; x < size; x++) {
+                for (let y = 0; y < size; y++) {
+                    const tile = this.tiles[x][y];
+                    population += tile.building?.residents?.length ?? 0;
+                }
+            }
+            return population;
         },
 
         findTile(start, criteria, maxDistance) {

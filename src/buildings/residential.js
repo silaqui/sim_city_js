@@ -16,7 +16,6 @@ export function createResidentialBuilding(x, y) {
             if (this.residents.length < this.maxResidents) {
                 const resident = createCitizen(this);
                 this.residents.push(resident);
-                city.citizens.push(resident);
                 console.log(resident);
             }
             if (Math.random() < 0.05) {
@@ -25,6 +24,9 @@ export function createResidentialBuilding(x, y) {
                     this.updated = true;
                 }
             }
+        },
+        dispose() {
+
         },
         toHtml() {
             let html = '';

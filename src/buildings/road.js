@@ -8,6 +8,8 @@ export function createRoad(x, y) {
         update(city) {
             this.updated = false;
         },
+        dispose() {
+        },
         toHtml() {
             let html = '';
             html += `<br><strong>Building</strong><br>`

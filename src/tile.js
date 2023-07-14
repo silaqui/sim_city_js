@@ -9,6 +9,7 @@ export function createTile(x, y) {
         building: undefined,
 
         removeBuilding() {
+            this.building?.dispose();
             this.building = null;
         },
         placeBuilding(activeToolId) {

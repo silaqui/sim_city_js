@@ -24,6 +24,11 @@ export function createCommercialBuilding(x, y) {
                 }
             }
         },
+        dispose() {
+            for (const w of this.workers) {
+                w.setJob(null)
+            }
+        },
         toHtml() {
             let html = '';
             html += `<br><strong>Building</strong><br>`
