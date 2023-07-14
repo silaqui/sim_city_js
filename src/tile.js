@@ -1,4 +1,4 @@
-import {createBuilding} from "./buildings.js";
+import {createBuilding} from "./buildings/buildings.js";
 
 export function createTile(x, y) {
     return {
